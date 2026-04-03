@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donor Prediction</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            text-align: center;
+        }
+        .box {
+            margin: 100px auto;
+            padding: 30px;
+            width: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            width: 90%;
+        }
+        button {
+            padding: 10px 20px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Donor Prediction</h2>
+
+    <form method="POST">
+        <input type="number" name="recency" placeholder="Recency (months)" required><br>
+        <input type="number" name="frequency" placeholder="Frequency (times)" required><br>
+        <input type="number" name="monetary" placeholder="Blood Donated (c.c.)" required><br>
+        <input type="number" name="time" placeholder="Time since first donation" required><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h3>{{ prediction }}</h3>
+    {% endif %}
+</div>
+
+</body>
+</html>

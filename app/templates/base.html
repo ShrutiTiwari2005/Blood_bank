@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodBank AI | Institutional SaaS Platform v4.4</title>
+    
+    <!-- v4.4 ARCHITECT Design System Framework -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v='4.4') }}">
+    
+    <!-- Lucide Icon Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body class="luxury-experience vibrancy-low bg-slate-50">
+
+    <!-- Layer 1: Master Navigation Suite (v4.4 Floating Nav) -->
+    <nav class="v4-top-nav fixed top-0 inset-x-0 h-20 z-[2000] transition-all duration-500">
+        <div class="max-w-7xl mx-auto h-full px-8 flex items-center justify-between">
+            <!-- Brand Interface -->
+            <div class="flex items-center gap-4 group cursor-pointer" onclick="location.href='/'">
+                <div class="h-10 w-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
+                    <i data-lucide="droplet" class="text-white" size="24"></i>
+                </div>
+                <span class="text-xl font-black tracking-tighter text-slate-800">BloodBank AI</span>
+            </div>
+
+            <!-- Precision Navigation Node -->
+            <div class="hidden md:flex items-center gap-10">
+                <a href="/" class="nav-link-v4 {{ 'active' if request.path == '/' }}">Home</a>
+                <a href="/analytics" class="nav-link-v4 {{ 'active' if request.path == '/analytics' }}">Intelligence Hub</a>
+                <a href="/patients" class="nav-link-v4 {{ 'active' if request.path == '/patients' }}">Patient Hub</a>
+                <a href="/blood_stock" class="nav-link-v4 {{ 'active' if request.path == '/blood_stock' }}">Procurement</a>
+                
+                <div class="h-6 w-px bg-slate-200"></div>
+
+                {% if current_user.is_authenticated %}
+                    <a href="/dashboard" class="btn-elite btn-primary px-6 py-2.5 text-[11px]">Control Center</a>
+                    <div class="flex items-center gap-3 pl-4 group cursor-pointer" onclick="location.href='/profile'">
+                        <img src="https://ui-avatars.com/api/?name={{ current_user.username }}&background=10B981&color=fff&bold=true" class="w-9 h-9 rounded-full border-2 border-white shadow-sm">
+                        <div class="hidden lg:block text-left">
+                            <div class="text-[10px] font-black uppercase text-slate-800">{{ current_user.username }}</div>
+                            <div class="text-[9px] font-bold text-slate-400">ID: #{{ current_user.id }}</div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="flex items-center gap-4">
+                        <a href="/login" class="text-xs font-black text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-widest">Login</a>
+                        <a href="/register" class="btn-elite btn-primary px-8 py-2.5 text-[11px]">Get Started</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Mobile Hub Trigger -->
+            <button class="md:hidden p-3 bg-white rounded-xl shadow-sm border border-slate-100">
+                <i data-lucide="menu" size="20"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Layer 2: Main SaaS Viewport -->
+    <main class="pt-20 min-h-screen">
+        
+        <!-- Header Signal Indicator -->
+        <div class="fixed top-24 left-8 z-[1500] pointer-events-none">
+            <div class="v4-pill bg-white/80 backdrop-blur-xl border border-slate-100 px-4 py-2 flex items-center gap-3">
+                {% if db_status %}
+                    <div class="pulse-dot bg-emerald-500"></div>
+                    <span class="text-[9px] font-black uppercase tracking-widest text-emerald-600">Sync: Production Live</span>
+                {% else %}
+                    <div class="pulse-dot bg-red-500"></div>
+                    <span class="text-[9px] font-black uppercase tracking-widest text-red-600">Sync: Offline Mode</span>
+                {% endif %}
+            </div>
+        </div>
+
+        {% block content %}{% endblock %}
+
+    </main>
+
+    <!-- Tier 4: Global Institutional Footer -->
+    <footer class="bg-slate-900 pt-20 pb-10 text-white reveal active">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-4 gap-12 mb-20">
+            <div class="col-span-1">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="h-10 w-10 bg-emerald-500 rounded-xl flex items-center justify-center">
+                        <i data-lucide="droplet" size="24"></i>
+                    </div>
+                    <span class="text-xl font-black tracking-tighter">BloodBank AI</span>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed font-medium">
+                    Advancing healthcare logistics through regional AI nodes and clinically verified procurement intelligence.
+                </p>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-black uppercase tracking-[0.2em] mb-8 text-slate-500">SaaS Intelligence</h5>
+                <ul class="space-y-4 text-xs font-bold text-slate-300">
+                    <li onclick="location.href='/analytics'" class="hover:text-white cursor-pointer transition-colors">Intelligence Hub</li>
+                    <li onclick="location.href='/report_analyzer'" class="hover:text-white cursor-pointer transition-colors">Diagnostic Analyzer</li>
+                    <li onclick="location.href='/patients'" class="hover:text-white cursor-pointer transition-colors">Patient Priority Hub</li>
+                    <li onclick="location.href='/blood_stock'" class="hover:text-white cursor-pointer transition-colors">Regional Procurement</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-black uppercase tracking-[0.2em] mb-8 text-slate-500">Regional Hubs</h5>
+                <ul class="space-y-4 text-xs font-bold text-slate-300">
+                    <li>Bhopal Logistics Hub</li>
+                    <li>Indore Clinical Unit</li>
+                    <li>Gwalior Satelite Node</li>
+                    <li>Jabalpur Procurement Center</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-black uppercase tracking-[0.2em] mb-8 text-slate-500">Security & Privacy</h5>
+                <div class="flex items-center gap-3 p-4 bg-white/5 rounded-2xl border border-white/10 mb-6">
+                    <i data-lucide="shield-check" class="text-emerald-500" size="20"></i>
+                    <div class="text-[9px] uppercase font-black text-slate-400">HIPAA Compliant <br> AES-256 Encrypted</div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-8 pt-10 border-t border-white/5 flex justify-between items-center text-[10px] font-bold text-slate-600">
+            <span>&copy; 2026 BloodBank AI Platform. All Rights Reserved.</span>
+            <div class="flex gap-8">
+                <span>Terms of Service</span>
+                <span>Privacy Protocol</span>
+                <span>Cookie Requisition</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- v4.4 Interaction Suite -->
+    <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
+    <script>
+        lucide.createIcons();
+        
+        // Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.v4-top-nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('v4-nav-scrolled');
+            } else {
+                nav.classList.remove('v4-nav-scrolled');
+            }
+        });
+
+        // Global Logout Protocol
+        function triggerLogout() {
+            if(confirm('Terminate Regional Hub Session?')) {
+                location.href='/logout';
+            }
+        }
+    </script>
+
+    <style>
+        .v4-top-nav {
+            background: rgba(255, 255, 255, 0.05); /* Hidden by default */
+            border-bottom: 1px solid transparent;
+        }
+        .v4-nav-scrolled {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(24px) saturate(200%);
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            height: 72px !important;
+        }
+        .nav-link-v4 {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            text-decoration: none;
+            transition: 0.3s;
+            position: relative;
+        }
+        .nav-link-v4:hover { color: #1e293b; }
+        .nav-link-v4.active { color: #10b981; }
+        .nav-link-v4.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #10b981;
+            border-radius: 99px;
+            box-shadow: 0 0 8px rgba(16,185,129,0.5);
+        }
+    </style>
+</body>
+</html>

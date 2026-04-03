@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="min-h-[90vh] flex items-center justify-center py-20 px-8 relative overflow-hidden reveal active">
+    
+    <!-- Deep SaaS Background Elements -->
+    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full"></div>
+    <div class="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full"></div>
+
+    <div class="max-w-2xl w-full relative z-10">
+        
+        <div class="text-center mb-12">
+            <div class="h-16 w-16 bg-emerald-500 rounded-[2rem] flex items-center justify-center shadow-2xl shadow-emerald-500/20 mx-auto mb-8">
+                <i data-lucide="user-plus" class="text-white" size="32"></i>
+            </div>
+            <h1 class="text-4xl font-black text-slate-800 tracking-tighter">High-Risk Onboarding</h1>
+            <p class="text-slate-500 mt-3 font-medium opacity-80">Synchronize medical health parameters with the national priority mesh.</p>
+        </div>
+
+        <div class="luxury-card p-10 shadow-2xl border-t-8 border-t-emerald-500">
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="p-4 mb-8 text-xs font-black rounded-2xl flex items-center gap-3 {{ 'bg-red-50 text-red-600 border border-red-100' if category == 'error' else 'bg-emerald-50 text-emerald-600 border border-emerald-100' }}">
+                            <i data-lucide="{{ 'alert-circle' if category == 'error' else 'check-circle' }}" size="14"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="/onboard_patient" class="space-y-8">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="form-group">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Patient Registry Name</label>
+                        <input type="text" name="name" class="input-elite h-14" placeholder="Institutional Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Clinical Age Node</label>
+                        <input type="number" name="age" class="input-elite h-14" placeholder="Age" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="form-group">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Blood Phenotype</label>
+                        <select name="blood_group" class="input-elite h-14 w-full bg-white">
+                            <option value="A+">A Positive (A+)</option>
+                            <option value="A-">A Negative (A-)</option>
+                            <option value="B+">B Positive (B+)</option>
+                            <option value="B-">B Negative (B-)</option>
+                            <option value="O+">O Positive (O+)</option>
+                            <option value="O-">O Negative (O-)</option>
+                            <option value="AB+">AB Positive (AB+)</option>
+                            <option value="AB-">AB Negative (AB-)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Hemoglobin Level (g/dL)</label>
+                        <input type="number" step="0.1" name="hb" class="input-elite h-14" placeholder="Hb Level" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Surgical/Chronic Condition Node</label>
+                    <input type="text" name="condition" class="input-elite h-14" placeholder="e.g. Thalassemia, Chronic Anemia" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="form-group">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Regional Deployment Hub</label>
+                        <input type="text" name="city" class="input-elite h-14" placeholder="Bhopal/Indore Hub" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Medical Node Phone</label>
+                        <input type="text" name="phone" class="input-elite h-14" placeholder="+91-XXXXX-XXXXX" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full btn-elite btn-primary py-5 text-sm shadow-xl shadow-emerald-500/20 tracking-widest">
+                    SYNCHRONIZE PATIENT DATA MESH
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto vibrancy-medium p-4 reveal active">
+    
+    <div class="mb-12 flex justify-between items-end">
+        <div>
+            <div class="v4-pill bg-slate-900 text-white mb-6 w-fit border-none">
+                <i data-lucide="droplet" size="14" class="text-emerald-500"></i>
+                <span class="tracking-widest">Global Clinical Inventory v4.2</span>
+            </div>
+            <h1 class="text-5xl font-black tracking-tighter text-slate-800">Operational Stock Metrics</h1>
+            <p class="text-slate-500 mt-4 text-lg font-medium opacity-80">Real-time regional hub inventory levels for clinical procurement.</p>
+        </div>
+        <div class="flex gap-4">
+            <div class="v4-pill bg-white border border-slate-100 flex items-center gap-2">
+                <i data-lucide="shield-check" size="14" class="text-emerald-500"></i>
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">Inventory Verified</span>
+            </div>
+            <button class="btn-elite bg-slate-100 text-xs font-black text-slate-600 px-6 py-3 border border-slate-200">
+                <i data-lucide="download-cloud" class="mr-2" size="14"></i> Export PDF Audit
+            </button>
+        </div>
+    </div>
+
+    <!-- Tier 2: Inventory Status Table (Luxury Table Analytics) -->
+    <div class="v4-card-premium p-12 shadow-2xl reveal active">
+        
+        <div class="flex items-center justify-between mb-10 pb-4 border-b border-slate-50">
+            <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-400">Inventory Status: {{ stock|length if stock else 0 }} Active Hub Nodes Synchronized</h5>
+            <div class="v4-pill bg-slate-50 border-none text-[8px] font-black text-slate-400">SYNC INTERVAL: 60S CLOCK PULSE</div>
+        </div>
+
+        <table class="w-full text-left">
+            <thead class="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                <tr>
+                    <th class="pb-6">Regional Node Hub</th>
+                    <th class="pb-6">Inventory Phenotype</th>
+                    <th class="pb-6">Available Clinical Units</th>
+                    <th class="pb-6 text-right">Supply Chain Status</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm font-bold text-slate-700">
+                {% if stock %}
+                {% for item in stock %}
+                <tr class="border-b border-slate-50 group hover:bg-slate-50/50 transition-colors">
+                    <td class="py-6">
+                        <div class="flex items-center gap-4">
+                            <div class="h-10 w-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 font-black text-xs">
+                                <i data-lucide="map-pin" size="16"></i>
+                            </div>
+                            <div>
+                                <div class="text-slate-900 font-black">{{ item.city }} Unit</div>
+                                <div class="text-[9px] text-slate-400 font-bold uppercase tracking-tight">NATIONAL HUB LEVEL 1</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-6">
+                        <span class="px-3 py-1 bg-red-100 text-red-700 rounded-lg text-xs font-black shadow-sm">{{ item.blood_group }} Group</span>
+                    </td>
+                    <td class="py-6">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xl font-black text-slate-800 tracking-tighter">{{ item.units_available }} <span class="text-xs text-slate-300">UNITS</span></span>
+                            <div class="h-1.5 w-24 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500" style="width: {{ (item.units_available / 200 * 100)|round(0) if item.units_available < 200 else 100 }}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-6 text-right">
+                        <div class="v4-pill bg-emerald-50 text-emerald-600 border-none inline-flex ml-auto text-[9px] font-black tracking-widest">Optimal Node</div>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4" class="py-24 text-center text-slate-400 font-medium italic">
+                        The Master Inventory node is currently empty. Initialize first stock entry to sync operational metrics.
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+
+<style>
+    .tracking-tighter { letter-spacing: -0.06em; }
+</style>
+
+{% endblock %}
