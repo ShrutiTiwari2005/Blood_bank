@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto p-8 flex flex-col items-center justify-center min-h-[70vh] reveal active">
+    <!-- Clinical Error Signal -->
+    <div class="h-24 w-24 bg-red-50 rounded-[2rem] flex items-center justify-center mb-10 border border-red-100 shadow-sm">
+        <i data-lucide="shield-alert" size="40" class="text-red-500"></i>
+    </div>
+    
+    <div class="text-center">
+        <div class="v4-pill bg-red-900/10 text-red-600 mb-6 mx-auto w-fit border-none px-6 py-2">
+            <span class="tracking-widest uppercase text-[10px] font-black">Clinical Synchronization Failure v4.6</span>
+        </div>
+        <h1 class="text-5xl font-black tracking-tighter text-slate-800 mb-6">SaaS Hub Node Synchronization Interrupt</h1>
+        <p class="text-slate-500 max-w-xl mx-auto text-lg font-medium opacity-80 leading-relaxed mb-12">
+            The institutional SaaS engine has detected a critical database synchronization failure. Procurement nodes are currently in read-only offline mode for patient data protection.
+        </p>
+        
+        <div class="flex gap-4 justify-center">
+            <button onclick="location.reload()" class="btn-elite btn-primary px-10 py-4 text-xs font-black shadow-emerald-500/10">
+                Resynchronize Connection
+            </button>
+            <a href="/" class="btn-elite bg-white border border-slate-200 text-slate-500 px-10 py-4 text-xs font-black shadow-sm">
+                Hub Hub Control
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+{% endblock %}

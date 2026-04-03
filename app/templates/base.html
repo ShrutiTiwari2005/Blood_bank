@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloodBank AI | Institutional SaaS Platform v4.4</title>
+    <title>BloodBank AI | Institutional Healthcare Platform v4.6</title>
     
     <!-- v4.4 ARCHITECT Design System Framework -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v='4.4') }}">
@@ -30,9 +30,9 @@
             <!-- Precision Navigation Node -->
             <div class="hidden md:flex items-center gap-10">
                 <a href="/" class="nav-link-v4 {{ 'active' if request.path == '/' }}">Home</a>
-                <a href="/analytics" class="nav-link-v4 {{ 'active' if request.path == '/analytics' }}">Intelligence Hub</a>
+                <a href="/analytics" class="nav-link-v4 {{ 'active' if request.path == '/analytics' }}">Analytics Hub</a>
                 <a href="/patients" class="nav-link-v4 {{ 'active' if request.path == '/patients' }}">Patient Hub</a>
-                <a href="/blood_stock" class="nav-link-v4 {{ 'active' if request.path == '/blood_stock' }}">Procurement</a>
+                <a href="/blood_stock" class="nav-link-v4 {{ 'active' if request.path == '/blood_stock' }}">Blood Stock</a>
                 
                 <div class="h-6 w-px bg-slate-200"></div>
 
@@ -71,7 +71,7 @@
                     <span class="text-[9px] font-black uppercase tracking-widest text-emerald-600">Sync: Production Live</span>
                 {% else %}
                     <div class="pulse-dot bg-red-500"></div>
-                    <span class="text-[9px] font-black uppercase tracking-widest text-red-600">Sync: Offline Mode</span>
+                    <span class="text-[9px] font-black uppercase tracking-widest text-red-600" title="Clinical Database Node Offline - Please ensure MySQL Service is active on port 3306">Sync: Node Offline</span>
                 {% endif %}
             </div>
         </div>

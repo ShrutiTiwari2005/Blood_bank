@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto p-8 flex flex-col items-center justify-center min-h-[70vh] reveal active">
+    <!-- Clinical Error Signal -->
+    <div class="h-24 w-24 bg-slate-100 rounded-[2rem] flex items-center justify-center mb-10 border border-slate-200 shadow-sm">
+        <i data-lucide="map-pin-off" size="40" class="text-slate-400"></i>
+    </div>
+    
+    <div class="text-center">
+        <div class="v4-pill bg-slate-900 text-white mb-6 mx-auto w-fit border-none px-6 py-2">
+            <span class="tracking-widest uppercase text-[10px] font-black">Error Code: 404 Hub Node Missing</span>
+        </div>
+        <h1 class="text-5xl font-black tracking-tighter text-slate-800 mb-6">Page Node Not Found</h1>
+        <p class="text-slate-500 max-w-xl mx-auto text-lg font-medium opacity-80 leading-relaxed mb-12">
+            The clinical resource you are attempting to access has either been reassigned or is currently outside the institutional mesh perimeter.
+        </p>
+        
+        <div class="flex gap-4 justify-center">
+            <a href="/" class="btn-elite btn-primary px-10 py-4 text-xs font-black shadow-emerald-500/10">
+                Return to Hub Hub
+            </a>
+            <button onclick="history.back()" class="btn-elite bg-white border border-slate-200 text-slate-500 px-10 py-4 text-xs font-black shadow-sm">
+                Previous Trace
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+{% endblock %}

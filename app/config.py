@@ -1,7 +1,7 @@
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
+from dotenv import load_dotenv, find_dotenv
+# v4.6 Standard Config Node: Auto-Discovery
+load_dotenv(find_dotenv())
 
 class Config:
     # SaaS Security Node: Environment Variable Governance

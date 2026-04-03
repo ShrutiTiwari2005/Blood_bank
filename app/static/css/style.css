@@ -7,35 +7,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    /* --- v4.2 CORE COLOR TOKENS (SaaS Standard) --- */
-    --v4-primary: #10B981;
-    --v4-primary-glow: rgba(16, 185, 129, 0.15);
-    --v4-primary-gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
-    --v4-accent: #0EA5E9;
-    --v4-bg-main: #F8FAFC;
+    /* --- v4.6 CLINICAL CORE COLOR TOKENS (Healthcare Standard) --- */
+    --v4-primary: #059669; /* Professional Emerald */
+    --v4-primary-glow: rgba(5, 150, 105, 0.1);
+    --v4-primary-gradient: linear-gradient(180deg, #059669 0%, #047857 100%);
+    --v4-accent: #0284C7; /* Clinical Blue */
+    --v4-bg-main: #FDFDFD;
     --v4-bg-surface: #FFFFFF;
     --v4-bg-sidebar: #0F172A;
     --v4-text-primary: #1E293B;
-    --v4-text-muted: #64748B;
-    --v4-border: #E2E8F0;
+    --v4-text-muted: #6B7280;
+    --v4-border: #E5E7EB;
     
-    /* --- STATE TOKENS (Medical Diagnostics) --- */
-    --v4-critical: #EF4444; 
-    --v4-warning: #F59E0B;
-    --v4-normal: #10B981;
+    /* --- STATE TOKENS --- */
+    --v4-critical: #DC2626; 
+    --v4-warning: #D97706;
+    --v4-normal: #059669;
     
-    /* --- LUXURY EFFECTS SYSTEM (Enhanced v4.2) --- */
-    --v4-glass: rgba(255, 255, 255, 0.75);
-    --v4-glass-blur: blur(24px) saturate(200%);
-    --v4-shadow-luxury: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --v4-shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --v4-card-glow: 0 0 20px rgba(16, 185, 129, 0.03);
+    /* --- SURGICAL PRECISION SYSTEM (Standard v4.6) --- */
+    --v4-glass: rgba(255, 255, 255, 0.9);
+    --v4-glass-blur: blur(8px);
+    --v4-shadow-luxury: 0 1px 3px rgba(0,0,0,0.1);
+    --v4-shadow-premium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --v4-card-glow: none;
     
     /* --- GEOMETRIC SYSTEM --- */
-    --v4-radius: 16px;
-    --v4-radius-inner: 12px;
-    --v4-sidebar-w: 280px;
-    --v4-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --v4-radius: 12px;
+    --v4-radius-inner: 8px;
+    --v4-sidebar-w: 260px;
+    --v4-transition: 150ms ease-in-out;
 }
 
 [data-theme='dark'] {
