@@ -2,16 +2,19 @@
 
 {% block content %}
 
-<div class="max-w-7xl mx-auto residency-high p-8 vibrancy-medium reveal active">
+<!-- v5.0 HEMO-SYNC Lab Diagnostic Hub -->
+<div class="main-content reveal active">
     
-    <div class="flex items-end justify-between mb-16">
+    <!-- Header Protocol -->
+    <div class="section-header">
         <div>
-            <div class="v4-pill bg-slate-900 text-white mb-6 w-fit border-none shadow-xl">
-                <i data-lucide="microscope" size="14" class="text-emerald-500"></i>
-                <span class="tracking-widest capitalize">SaaS Blood Report Analyzer v4.4</span>
-            </div>
-            <h1 class="text-6xl font-black tracking-tighter text-slate-800">Diagnostic Analyzer</h1>
-            <p class="text-slate-500 mt-4 text-xl font-medium opacity-80">Institutional blood metric visualization and guidance hub.</p>
+            <h1 class="section-title tracking-tighter">Diagnostic Analyzer</h1>
+            <p class="text-sm font-medium text-slate-400 mt-2 tracking-wide uppercase">Institutional Hematology Lab v5.0</p>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="location.reload()" class="btn-hemo btn-secondary px-8 py-3.5 text-[10px] font-black tracking-widest shadow-sm">
+                <i data-lucide="refresh-cw" class="mr-3" size="14"></i> CLEAR PARAMETERS
+            </button>
         </div>
     </div>
 
@@ -19,80 +22,91 @@
         
         <!-- Left: Diagnostic Input -->
         <div class="col-span-12 lg:col-span-4">
-            <div class="luxury-card p-10 shadow-2xl border-t-8 border-t-emerald-500">
-                <h3 class="text-xl font-black text-slate-800 mb-8 tracking-tight">Report Parameters</h3>
+            <div class="clinical-card border-t-8 border-t-red-800">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="h-10 w-10 bg-red-50 rounded-xl flex items-center justify-center">
+                        <i data-lucide="microscope" class="text-red-700" size="20"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 tracking-tight">Report Parameters</h3>
+                </div>
                 
                 <form method="POST" class="space-y-8">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     
-                    <div class="form-group">
-                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Hemoglobin (Hb) (g/dL)</label>
-                        <input type="number" step="0.1" name="hb" class="input-elite h-14" placeholder="e.g. 12.5" required value="{{ analysis.hb if analysis else '' }}">
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 ml-1">Hemoglobin (Hb) (g/dL)</label>
+                        <input type="number" step="0.1" name="hb" 
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl p-5 text-sm font-bold text-slate-800 focus:outline-none focus:border-red-500 transition-all" 
+                            placeholder="e.g. 12.5" required value="{{ analysis.hb if analysis else '' }}">
                     </div>
 
-                    <div class="form-group">
-                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">RBC Count (Million/uL)</label>
-                        <input type="number" step="0.01" name="rbc" class="input-elite h-14" placeholder="e.g. 5.1" required value="{{ analysis.rbc if analysis else '' }}">
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 ml-1">RBC Count (Million/uL)</label>
+                        <input type="number" step="0.01" name="rbc" 
+                            class="w-full bg-slate-50 border border-slate-100 rounded-xl p-5 text-sm font-bold text-slate-800 focus:outline-none focus:border-red-500 transition-all" 
+                            placeholder="e.g. 5.1" required value="{{ analysis.rbc if analysis else '' }}">
                     </div>
 
-                    <button type="submit" class="w-full btn-elite btn-primary py-5 text-sm shadow-xl shadow-emerald-500/20 tracking-widest">
-                        EXECUTE DIAGNOSTIC HUB
+                    <button type="submit" class="w-full btn-hemo py-5 text-[10px] font-black tracking-widest shadow-xl">
+                        EXECUTE LABORATORY ANALYSIS
                     </button>
                     
-                    <p class="text-[9px] font-black text-slate-300 uppercase text-center mt-6 tracking-widest">
-                        ⚠️ GUIDANCE HUB ONLY. NOT MEDICAL DIAGNOSIS.
-                    </p>
+                    <div class="mt-8 p-4 bg-amber-50 rounded-xl border border-amber-100">
+                        <p class="text-[9px] font-black text-amber-700 uppercase text-center tracking-widest">
+                            ⚠️ INSTITUTIONAL GUIDANCE ONLY. NOT A FORMAL MEDICAL DIAGNOSIS.
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
 
-        <!-- Right: Visualization & Explanation -->
+        <!-- Right: Visualization & Interpretation -->
         <div class="col-span-12 lg:col-span-8">
             {% if analysis %}
-            <div class="space-y-8 animate-in slide-in-from-bottom duration-500">
+            <div class="space-y-8">
                 
                 <!-- Clinical Visualization Node -->
-                <div class="luxury-card p-10 reveal active">
-                    <div class="flex items-center justify-between mb-10 border-b border-slate-50 pb-6">
-                        <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Institutional Diagnostic Visualization</h5>
-                        <div class="v4-pill bg-emerald-50 text-emerald-600 border-none text-[8px] font-black">CONSISTENT MESH</div>
+                <div class="clinical-card">
+                    <div class="flex items-center justify-between mb-12 border-b border-slate-50 pb-6">
+                        <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Hematology Metric Visualization</h5>
+                        <div class="hemo-pill pill-green border border-green-50">SYNC: LIVE</div>
                     </div>
                     
                     <div class="h-64 relative mb-12">
-                        <canvas id="medicalChart"></canvas>
+                        <canvas id="hemoLabChart"></canvas>
                     </div>
 
                     <div class="grid grid-cols-2 gap-8 text-center pt-8 border-t border-slate-50">
                         <div>
                             <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Hb Status</div>
-                            <div class="text-2xl font-black {{ 'text-red-500' if analysis.hb_status == 'Low' else 'text-emerald-500' }}">{{ analysis.hb_status }}</div>
+                            <div class="text-2xl font-black {{ 'text-red-700' if analysis.hb_status == 'Low' else 'text-emerald-600' }}">{{ analysis.hb_status }}</div>
                         </div>
                         <div>
                             <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">RBC Status</div>
-                            <div class="text-2xl font-black {{ 'text-red-500' if analysis.rbc_status == 'Low' else 'text-emerald-500' }}">{{ analysis.rbc_status }}</div>
+                            <div class="text-2xl font-black {{ 'text-red-700' if analysis.rbc_status == 'Low' else 'text-emerald-600' }}">{{ analysis.rbc_status }}</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Clinical Interpretation Node -->
-                <div class="p-8 bg-slate-900 rounded-[3rem] text-white reveal active">
+                <div class="p-10 bg-slate-900 rounded-[2rem] text-white">
                     <div class="flex items-center gap-6 mb-8">
-                        <div class="h-12 w-12 bg-emerald-500 rounded-2xl flex items-center justify-center">
+                        <div class="h-12 w-12 bg-red-700 rounded-2xl flex items-center justify-center">
                             <i data-lucide="info" class="text-white"></i>
                         </div>
                         <div>
-                            <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Architectural Clinical Interpretation</div>
+                            <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Architectural Guidance Protocol</div>
                             <h4 class="text-xl font-black tracking-tight">Diagnostic Summary</h4>
                         </div>
                     </div>
                     
-                    <p class="text-slate-300 text-lg font-medium leading-relaxed mb-6 opacity-90">
+                    <p class="text-slate-300 text-lg font-medium leading-relaxed mb-8 opacity-90">
                         {{ analysis.clinical_guidance }}
                     </p>
                     
                     <div class="flex items-center gap-4 p-5 bg-white/5 rounded-2xl border border-white/10">
-                        <i data-lucide="shield-check" class="text-emerald-500" size="18"></i>
-                        <span class="text-[9px] font-black uppercase tracking-widest text-slate-400">Validated by Institutional GxP Protocol v4.4</span>
+                        <i data-lucide="shield-check" class="text-red-500" size="18"></i>
+                        <span class="text-[9px] font-black uppercase tracking-widest text-slate-500">Validated by Hemo-Sync Diagnostic Engine v5.0</span>
                     </div>
                 </div>
 
@@ -100,25 +114,24 @@
             
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
-                const ctx = document.getElementById('medicalChart').getContext('2d');
+                lucide.createIcons();
+                const ctx = document.getElementById('hemoLabChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: ['Hemoglobin (g/dL)', 'RBC (Million/uL)'],
                         datasets: [{
-                            label: 'Your Metrics',
+                            label: 'Institutional Metrics',
                             data: [{{ analysis.hb }}, {{ analysis.rbc }}],
-                            backgroundColor: ['rgba(16, 185, 129, 0.8)', 'rgba(59, 130, 246, 0.8)'],
-                            borderColor: ['#10b981', '#3b82f6'],
-                            borderWidth: 2,
-                            borderRadius: 12
+                            backgroundColor: ['#991B1B', '#1E293B'],
+                            borderRadius: 4,
+                            barThickness: 48
                         }, {
-                            label: 'Normal Threshold',
+                            label: 'Standard Baseline',
                             data: [13.5, 5.0],
-                            backgroundColor: 'rgba(226, 232, 240, 0.5)',
-                            borderColor: '#e2e8f0',
-                            borderWidth: 1,
-                            borderRadius: 12
+                            backgroundColor: '#F1F5F9',
+                            borderRadius: 4,
+                            barThickness: 48
                         }]
                     },
                     options: {
@@ -126,7 +139,7 @@
                         maintainAspectRatio: false,
                         plugins: { legend: { display: false } },
                         scales: {
-                            y: { beginAtZero: true, grid: { display: false } },
+                            y: { beginAtZero: true, grid: { borderDash: [5, 5] }, ticks: { font: { weight: 'bold' } } },
                             x: { grid: { display: false } }
                         }
                     }
@@ -134,10 +147,11 @@
             </script>
 
             {% else %}
-            <div class="flex flex-col items-center justify-center h-full text-center py-20 opacity-40 reveal active">
+            <!-- Institutional Waiting Node -->
+            <div class="flex flex-col items-center justify-center h-full text-center py-32 opacity-20">
                 <i data-lucide="activity" class="text-slate-300 mb-8" size="80"></i>
-                <h4 class="text-xl font-black text-slate-500 tracking-tight">Institutional Waiting Node</h4>
-                <p class="text-xs font-black uppercase tracking-widest text-slate-400 mt-4 leading-relaxed">Enter clinical parameters to initialize <br> Diagnostic Visualization MESH.</p>
+                <h4 class="text-xl font-black text-slate-500 tracking-tight">Awaiting Parameters</h4>
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mt-4 leading-relaxed">Enter clinical metrics to initialize <br> Diagnostic Visualization Node.</p>
             </div>
             {% endif %}
         </div>
