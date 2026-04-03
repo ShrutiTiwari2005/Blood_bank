@@ -9,7 +9,7 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     """SaaS Standardized Login Interface."""
     if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))
+        return redirect(url_for('analytics.dashboard'))
 
     if request.method == "POST":
         username = request.form.get("username")
@@ -18,7 +18,7 @@ def login():
         result = AuthService.login_user(username, password)
         if result["status"] == "success":
             login_user(result["user"])
-            return redirect(url_for('main.onboarding'))
+            return redirect(url_for('analytics.dashboard'))
         else:
             flash(result["message"], "error")
     
