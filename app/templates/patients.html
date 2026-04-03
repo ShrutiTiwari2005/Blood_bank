@@ -2,124 +2,113 @@
 
 {% block content %}
 
-<div class="max-w-7xl mx-auto resiliency-high p-8 vibrancy-medium reveal active">
+<!-- v5.0 HEMO-SYNC Patient Registry -->
+<div class="main-content reveal active">
     
-    <div class="flex items-end justify-between mb-16">
+    <!-- Header Protocol -->
+    <div class="section-header">
         <div>
-            <div class="v4-pill bg-slate-900 text-white mb-6 w-fit border-none shadow-xl">
-                <i data-lucide="shield" size="14" class="text-emerald-500"></i>
-                <span class="tracking-widest capitalize">Institutional Patient Hub</span>
-            </div>
-            <h1 class="text-6xl font-black tracking-tighter text-slate-800">Priority Hub Hub</h1>
-            <p class="text-slate-500 mt-4 text-xl font-medium opacity-80">Managing high-risk procurement for prioritized clinical nodes.</p>
+            <h1 class="section-title tracking-tighter">Patient Hub</h1>
+            <p class="text-sm font-medium text-slate-400 mt-2 tracking-wide uppercase">Institutional Priority Mesh v5.0</p>
         </div>
-        <div class="header-actions flex gap-4">
-            <a href="/report_analyzer" class="btn-elite bg-white border border-slate-200 text-xs font-black text-slate-500 px-8 py-3.5 shadow-sm">
-                <i data-lucide="microscope" class="mr-3" size="14"></i> Diagnostic Analyzer
+        <div class="flex gap-4">
+            <a href="/report_analyzer" class="btn-hemo btn-secondary px-8 py-3.5 text-[10px] font-black tracking-widest shadow-sm">
+                <i data-lucide="microscope" class="mr-3" size="14"></i> DIAGNOSTIC LAB
             </a>
-            <a href="/onboard_patient" class="btn-elite btn-primary px-8 py-3.5 text-xs font-black shadow-emerald-500/10">
-                <i data-lucide="user-plus" class="mr-3" size="14"></i> Onboard High-Risk Node
+            <a href="/onboard_patient" class="btn-hemo px-8 py-3.5 text-[10px] font-black tracking-widest shadow-xl">
+                <i data-lucide="user-plus" class="mr-3" size="14"></i> ONBOARD PRIORITY CASE
             </a>
         </div>
     </div>
 
-    <!-- Tier 1: System Priority Ledger -->
-    <div class="grid grid-cols-12 gap-8 mb-12">
-        <div class="col-span-12">
-            <div class="luxury-card p-0 overflow-hidden shadow-2xl border-t-8 border-t-emerald-500">
-                
-                <div class="p-8 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between">
-                    <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Institutional Patient Registry</h5>
-                    <div class="flex items-center gap-6">
-                        <div class="flex items-center gap-2">
-                            <div class="h-2 w-2 rounded-full bg-red-500"></div>
-                            <span class="text-[9px] font-black text-slate-400 uppercase">Critical</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="h-2 w-2 rounded-full bg-amber-500"></div>
-                            <span class="text-[9px] font-black text-slate-400 uppercase">High</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="h-2 w-2 rounded-full bg-emerald-500"></div>
-                            <span class="text-[9px] font-black text-slate-400 uppercase">Normal</span>
-                        </div>
-                    </div>
+    <!-- Tier 1: Patient Registry Ledger -->
+    <div class="clinical-table-container shadow-2xl">
+        <div class="p-8 bg-[#F8FAFC] border-b border-slate-100 flex items-center justify-between">
+            <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Institutional Registry Logs</h5>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="h-2 w-2 rounded-full bg-red-700"></div>
+                    <span class="text-[9px] font-black text-slate-400 uppercase">Critical Case</span>
                 </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-50/20">
-                                <th class="px-8 py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">Diagnostic Node</th>
-                                <th class="px-8 py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">Hb Metrics</th>
-                                <th class="px-8 py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">Category</th>
-                                <th class="px-8 py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">Priority Status</th>
-                                <th class="px-8 py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">Clinical Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50">
-                            {% for p in patients %}
-                            <tr class="hover:bg-slate-50/30 transition-colors group">
-                                <td class="px-8 py-6">
-                                    <div class="flex items-center gap-4">
-                                        <div class="h-10 w-10 bg-slate-100 rounded-xl flex items-center justify-center font-black text-slate-400 text-xs shadow-sm">
-                                            {{ p.name[:2]|upper }}
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-black text-slate-800">{{ p.name }}</div>
-                                            <div class="text-[10px] font-bold text-slate-400 uppercase">{{ p.city }} • {{ p.phone }}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-6">
-                                    <div class="flex bg-slate-100 h-1.5 w-24 rounded-full overflow-hidden mb-2">
-                                        <div class="h-full {{ 'bg-red-500' if p.current_hb < 8.0 else 'bg-amber-500' if p.current_hb < 11.0 else 'bg-emerald-500' }}" style="width: {{ (p.current_hb / 16.0) * 100 }}%"></div>
-                                    </div>
-                                    <div class="text-[10px] font-black text-slate-800">{{ p.current_hb }} g/dL</div>
-                                </td>
-                                <td class="px-8 py-6">
-                                    <div class="v4-pill bg-slate-100 text-slate-600 border-none text-[8px] tracking-widest font-black uppercase">
-                                        {{ p.blood_group }} • {{ p.condition_status }}
-                                    </div>
-                                </td>
-                                <td class="px-8 py-6">
-                                    {% if p.priority_level == 'critical' %}
-                                        <div class="flex items-center gap-2 px-3 py-1 bg-red-50 text-red-600 rounded-full w-fit">
-                                            <div class="pulse-dot bg-red-500"></div>
-                                            <span class="text-[8px] font-black uppercase tracking-widest">CRITICAL HUB HUB</span>
-                                        </div>
-                                    {% elif p.priority_level == 'high' %}
-                                        <div class="flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-600 rounded-full w-fit">
-                                            <div class="h-1.5 w-1.5 rounded-full bg-amber-500"></div>
-                                            <span class="text-[8px] font-black uppercase tracking-widest">HIGH ALERT Node</span>
-                                        </div>
-                                    {% else %}
-                                        <div class="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full w-fit">
-                                            <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-                                            <span class="text-[8px] font-black uppercase tracking-widest">STABLE MESH</span>
-                                        </div>
-                                    {% endif %}
-                                </td>
-                                <td class="px-8 py-6">
-                                    <button class="text-xs font-black text-emerald-500 hover:text-emerald-600 transition-colors uppercase tracking-[0.1em] flex items-center gap-2">
-                                        <i data-lucide="zap" size="12"></i>
-                                        Procure Requisition
-                                    </button>
-                                </td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="5" class="px-8 py-20 text-center">
-                                    <i data-lucide="frown" class="mx-auto text-slate-200 mb-4" size="48"></i>
-                                    <div class="text-xs font-black text-slate-400 uppercase tracking-widest">No Priority Patients found in Institutional Mesh.</div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="flex items-center gap-2">
+                    <div class="h-2 w-2 rounded-full bg-amber-500"></div>
+                    <span class="text-[9px] font-black text-slate-400 uppercase">High Alert</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="h-2 w-2 rounded-full bg-green-600"></div>
+                    <span class="text-[9px] font-black text-slate-400 uppercase">Stable Hub</span>
                 </div>
             </div>
         </div>
+
+        <table class="clinical-table">
+            <thead>
+                <tr>
+                    <th>Clinical Subject</th>
+                    <th>Hb Metrics</th>
+                    <th>Category Hub</th>
+                    <th>Priority Mesh</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in patients %}
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                    <td>
+                        <div class="flex items-center gap-4">
+                            <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center font-black text-[#0F172A] text-[10px]">
+                                {{ p.name[:2]|upper }}
+                            </div>
+                            <div>
+                                <div class="text-sm font-black text-slate-800">{{ p.name }}</div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{{ p.city }} HUB #{{ p.id }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-[11px] font-bold text-slate-700 leading-none mb-2">{{ p.current_hb }} g/dL</div>
+                        <div class="h-1.5 w-24 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full {{ 'bg-red-700' if p.current_hb < 8.0 else 'bg-amber-500' if p.current_hb < 11.0 else 'bg-green-600' }}" 
+                                 style="width: {{ (p.current_hb / 16.0) * 100 }}%"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="hemo-pill pill-blue text-[9px] uppercase font-black w-fit">
+                            {{ p.blood_group }} Unit Request
+                        </div>
+                    </td>
+                    <td>
+                        {% if p.priority_level == 'critical' %}
+                            <div class="hemo-pill pill-red border border-red-100 uppercase text-[8px] font-black">
+                                <div class="h-1.5 w-1.5 rounded-full bg-red-800"></div> Critical Hub Hub
+                            </div>
+                        {% elif p.priority_level == 'high' %}
+                            <div class="hemo-pill pill-red border border-red-50 opacity-80 uppercase text-[8px] font-black">
+                                <div class="h-1.5 w-1.5 rounded-full bg-red-600"></div> High Case Node
+                            </div>
+                        {% else %}
+                            <div class="hemo-pill pill-green border border-green-50 uppercase text-[8px] font-black">
+                                <div class="h-1.5 w-1.5 rounded-full bg-green-600"></div> Stable Mesh Node
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button class="text-[10px] font-black text-red-700 hover:text-red-900 transition-colors uppercase tracking-widest flex items-center gap-2">
+                            <i data-lucide="zap" size="12"></i>
+                            Initiate Requisition
+                        </button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="py-24 text-center">
+                        <i data-lucide="folder-search" class="mx-auto text-slate-200 mb-6" size="48"></i>
+                        <p class="text-xs font-black text-slate-300 uppercase tracking-widest">No Subject Priority Found In Institutional Registry.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
