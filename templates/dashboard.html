@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Blood Bank Dashboard</h2>
+
+<div class="row text-center mb-4">
+
+<div class="col-md-4">
+
+<a href="/blood_stock" style="text-decoration:none">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h5>Total Blood Units</h5>
+<h3>{{ total_units }}</h3>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+
+<div class="col-md-4">
+
+<a href="/donor_list" style="text-decoration:none">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h5>Total Donors</h5>
+<h3>{{ total_donors }}</h3>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+
+<div class="col-md-4">
+
+<a href="/requests" style="text-decoration:none">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h5>Blood Requests</h5>
+<h3>{{ total_requests }}</h3>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h4 class="mb-3">Blood Stock</h4>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>City</th>
+<th>Blood Group</th>
+<th>Units Available</th>
+
+</tr>
+
+{% for row in data %}
+
+<tr>
+
+<td>{{ row.city }}</td>
+<td>{{ row.blood_group }}</td>
+<td>{{ row.units_available }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}

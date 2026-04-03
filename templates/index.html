@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="card shadow">
+
+<div class="card-body text-center">
+
+<h3 class="mb-4">Blood Availability Prediction</h3>
+
+<form method="POST">
+
+<select class="form-control mb-3" name="city">
+
+<option>Bhopal</option>
+<option>Indore</option>
+<option>Gwalior</option>
+<option>Sagar</option>
+<option>Jabalpur</option>
+
+</select>
+
+<select class="form-control mb-3" name="blood_group">
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
+</select>
+
+<input class="form-control mb-3"
+type="number"
+name="thalassemia_units_required"
+placeholder="Units Required">
+
+<button class="btn btn-danger w-100">
+
+Predict
+
+</button>
+
+</form>
+
+{% if prediction %}
+
+<div class="alert alert-info mt-3">
+
+{{prediction}}
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

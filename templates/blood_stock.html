@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Blood Stock</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>City</th>
+<th>Blood Group</th>
+<th>Units Available</th>
+</tr>
+
+{% for row in data %}
+
+<tr>
+
+<td>{{row.city}}</td>
+<td>{{row.blood_group}}</td>
+<td>{{row.units_available}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
