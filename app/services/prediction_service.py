@@ -6,6 +6,27 @@ class PredictionService:
     """SaaS Prediction & Clinical Analytics v4.0"""
 
     @staticmethod
+    def get_donor_prediction(recency, frequency, monetary, time):
+        """Medical Donor Reliability Analysis."""
+        try:
+            pred = MLInference.predict_donor_likelihood(recency, frequency, monetary, time)
+            
+            # Audit AI Interaction
+            ActivityService.log_activity(
+                user_id=current_user.id if current_user.is_authenticated else None,
+                action="AI Donor Prediction",
+                metadata={"recency": recency, "result": int(pred) if pred is not None else None}
+            )
+
+            if pred is not None:
+                # 1 can correspond to reliable or likely to donate
+                status_text = "✅ Reliable Donor Candidate" if pred == 1 else "⚠️ Low Reliability Prediction"
+                return {"status": "success", "prediction": status_text, "score": str(pred)}
+            return {"status": "error", "prediction": "Model Inference Failure."}
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+
+    @staticmethod
     def get_shortage_prediction(city, blood_group, units):
         """Medical Shortage Analysis Diagnostic Interface."""
         try:

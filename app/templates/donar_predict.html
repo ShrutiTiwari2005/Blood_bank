@@ -2,73 +2,97 @@
 
 {% block content %}
 
-<div class="max-w-4xl mx-auto vibrancy-low p-8 py-20 reveal active">
+<!-- v5.0 HEMO-SYNC Donor Reliability Predictor -->
+<div class="main-content reveal active">
     
-    <div class="text-center mb-16">
-        <div class="h-20 w-20 bg-red-500 rounded-[2.5rem] flex items-center justify-center shadow-2xl shadow-red-500/20 mx-auto mb-10">
-            <i data-lucide="brain-circuit" class="text-white" size="40"></i>
+    <!-- Header Protocol -->
+    <div class="section-header">
+        <div>
+            <h1 class="section-title tracking-tighter">Reliability Predictor</h1>
+            <p class="text-sm font-medium text-slate-400 mt-2 tracking-wide uppercase">AI-Inference Logic Node v5.0</p>
         </div>
-        <h1 class="text-5xl font-black text-slate-800 tracking-tighter">Donor Reliability Predictor</h1>
-        <p class="text-slate-500 mt-4 text-xl font-medium opacity-80">AI-driven reliability forecasting for regional donor nodes.</p>
+        <div class="flex gap-4">
+            <button onclick="location.reload()" class="btn-hemo btn-secondary px-8 py-3.5 text-[10px] font-black tracking-widest shadow-sm">
+                <i data-lucide="refresh-cw" class="mr-3" size="14"></i> RESET INFERENCE
+            </button>
+        </div>
     </div>
 
-    <div class="luxury-card p-12 shadow-2xl border-t-8 border-t-red-500">
+    <div class="grid grid-cols-12 gap-12">
         
-        <form method="POST" class="space-y-12">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <!-- Left: Diagnostic Input -->
+        <div class="col-span-12 lg:col-span-12 max-w-4xl">
+            <div class="clinical-card border-t-8 border-t-red-800">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-14 w-14 bg-red-700 rounded-2xl flex items-center justify-center shadow-lg shadow-red-900/10">
+                        <i data-lucide="brain-circuit" class="text-white" size="28"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 tracking-tight">Personnel Reliability Input</h3>
+                </div>
+                
+                <form method="POST" class="space-y-10">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    
+                    <div class="grid grid-cols-2 gap-10">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 ml-1">Donation Recency (Months)</label>
+                            <input type="number" name="recency" 
+                                class="w-full bg-slate-50 border border-slate-100 rounded-xl p-5 text-sm font-bold text-slate-800 focus:outline-none focus:border-red-700 transition-all font-mono" 
+                                placeholder="Months since last unit" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 ml-1">Institutional Frequency (Total)</label>
+                            <input type="number" name="frequency" 
+                                class="w-full bg-slate-50 border border-slate-100 rounded-xl p-5 text-sm font-bold text-slate-800 focus:outline-none focus:border-red-700 transition-all font-mono" 
+                                placeholder="Total units provided" required>
+                        </div>
+                    </div>
 
-            <div class="grid grid-cols-2 gap-10">
-                <div class="form-group">
-                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Recency (Months)</label>
-                    <input type="number" name="recency" class="input-elite h-14 font-black" placeholder="Months since last donation" required>
-                </div>
-                <div class="form-group">
-                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Frequency (Total Times)</label>
-                    <input type="number" name="frequency" class="input-elite h-14 font-black" placeholder="Total donation count" required>
-                </div>
+                    <div class="grid grid-cols-2 gap-10">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 ml-1">Cumulative Volume (c.c.)</label>
+                            <input type="number" name="monetary" 
+                                class="w-full bg-slate-50 border border-slate-100 rounded-xl p-5 text-sm font-bold text-slate-800 focus:outline-none focus:border-red-700 transition-all font-mono" 
+                                placeholder="Total blood volume" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 ml-1">Institutional Tenure (Months)</label>
+                            <input type="number" name="time" 
+                                class="w-full bg-slate-50 border border-slate-100 rounded-xl p-5 text-sm font-bold text-slate-800 focus:outline-none focus:border-red-700 transition-all font-mono" 
+                                placeholder="Months since registration" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full btn-hemo py-6 text-[11px] font-black tracking-widest shadow-xl">
+                        EXECUTE RELIABILITY INFERENCE
+                    </button>
+                    
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <p class="text-[9px] font-black text-slate-400 uppercase text-center tracking-widest leading-relaxed">
+                            ⚠️ This inference is based on institutional RF-Modeling. <br> Verify results against secondary clinical audit logs.
+                        </p>
+                    </div>
+                </form>
             </div>
 
-            <div class="grid grid-cols-2 gap-10">
-                <div class="form-group">
-                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Monetary (Total c.c.)</label>
-                    <input type="number" name="monetary" class="input-elite h-14 font-black" placeholder="Total blood volume (c.c.)" required>
-                </div>
-                <div class="form-group">
-                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Time Since First (Months)</label>
-                    <input type="number" name="time" class="input-elite h-14 font-black" placeholder="Months since first donation" required>
-                </div>
-            </div>
-
-            <button type="submit" class="w-full btn-elite btn-primary py-5 text-sm shadow-xl shadow-red-500/10 tracking-widest bg-red-600 hover:bg-red-700">
-                <i data-lucide="zap" class="mr-3" size="18"></i>
-                EXECUTE AI PREDICTION HUB
-            </button>
-        </form>
-
-        {% if prediction %}
-        <div class="mt-16 pt-12 border-t border-slate-100 animate-in slide-in-from-bottom duration-500">
-            <div class="p-8 bg-slate-900 rounded-[3rem] text-white flex items-center justify-between">
+            {% if prediction %}
+            <div class="mt-12 p-10 bg-slate-900 rounded-[2rem] text-white flex items-center justify-between border-l-8 border-l-red-700">
                 <div class="flex items-center gap-8">
-                    <div class="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
-                        <i data-lucide="activity" class="text-emerald-500" size="32"></i>
+                    <div class="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
+                        <i data-lucide="activity" class="text-red-500" size="32"></i>
                     </div>
                     <div>
-                        <div class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">AI Diagnostic Output</div>
-                        <h3 class="text-3xl font-black tracking-tighter">{{ prediction }}</h3>
+                        <div class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Inference Engine Output</div>
+                        <h3 class="text-4xl font-black tracking-tighter">{{ prediction }}</h3>
                     </div>
                 </div>
-                <div class="v4-pill bg-white/5 border-white/10 text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                    RF-Model Sync Verified
+                <div class="hemo-pill pill-red border border-red-900/30 text-[9px]">
+                    Validated v5.0 Node
                 </div>
             </div>
+            {% endif %}
         </div>
-        {% endif %}
-
     </div>
-
-    <p class="text-center text-[10px] font-black text-slate-300 uppercase mt-12 tracking-[0.2em] opacity-60">
-        Institutional Prediction Mesh • v4.4 Adaptive Node
-    </p>
 
 </div>
 

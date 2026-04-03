@@ -8,14 +8,16 @@ donor_bp = Blueprint('donor', __name__)
 @donor_bp.route("/donar_predict", methods=["GET", "POST"])
 @login_required
 def donar():
-    prediction = None
+    prediction_data = None
     if request.method == "POST":
         recency = request.form["recency"]
         frequency = request.form["frequency"]
         monetary = request.form["monetary"]
         time = request.form["time"]
-        prediction = PredictionService.get_donor_prediction(recency, frequency, monetary, time)
-    return render_template("donar_predict.html", prediction=prediction)
+        result = PredictionService.get_donor_prediction(recency, frequency, monetary, time)
+        if result and "prediction" in result:
+            prediction_data = result["prediction"]
+    return render_template("donar_predict.html", prediction=prediction_data)
 
 @donor_bp.route("/register_donor", methods=["GET","POST"])
 @login_required
