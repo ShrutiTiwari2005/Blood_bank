@@ -2,123 +2,115 @@
 
 {% block content %}
 
-<div class="max-w-7xl mx-auto resiliency-high p-8 vibrancy-medium reveal active">
+<!-- v5.0 HEMO-SYNC Dashboard Context -->
+<div class="main-content reveal active">
     
-    <div class="flex items-end justify-between mb-16">
+    <!-- Institutional Analytics Header -->
+    <div class="section-header">
         <div>
-            <div class="v4-pill bg-slate-900 text-white mb-6 w-fit border-none shadow-xl">
-                <i data-lucide="bar-chart-3" size="14" class="text-emerald-500"></i>
-                <span class="tracking-widest capitalize">Institutional Control Center v4.4</span>
-            </div>
-            <h1 class="text-6xl font-black tracking-tighter text-slate-800">Operational Analytics</h1>
-            <p class="text-slate-500 mt-4 text-xl font-medium opacity-80">Real-time clinical metrics and blood distribution logistics.</p>
+            <h1 class="section-title tracking-tighter">Operational Hub</h1>
+            <p class="text-sm font-medium text-slate-400 mt-2 tracking-wide uppercase">Institutional Data Sync v5.0</p>
         </div>
-        <div class="header-actions flex gap-4">
-            <button onclick="location.reload()" class="btn-elite bg-white border border-slate-200 text-xs font-black text-slate-500 px-8 py-3.5 shadow-sm">
-                <i data-lucide="refresh-cw" class="mr-3" size="14"></i> Force Hub Sync
+        <div class="flex gap-4">
+            <button onclick="location.reload()" class="btn-hemo btn-secondary px-8 py-3.5 text-[10px] font-black tracking-widest shadow-sm">
+                <i data-lucide="refresh-cw" class="mr-3" size="14"></i> RESYNC HUB
             </button>
-            <a href="/blood_request" class="btn-elite btn-primary px-8 py-3.5 text-xs font-black shadow-emerald-500/10">
-                <i data-lucide="plus" class="mr-3" size="14"></i> New Requisition
+            <a href="/blood_request" class="btn-hemo px-8 py-3.5 text-[10px] font-black tracking-widest shadow-xl">
+                <i data-lucide="plus" class="mr-3" size="14"></i> NEW REQUISITION
             </a>
         </div>
     </div>
 
-    <!-- Tier 1: Core Metrics -->
-    <div class="v4-grid-stats mb-12">
-        <div class="v4-card-premium p-10 bg-white border-t-4 border-t-emerald-500 shadow-xl">
-            <div class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-4">Total Stock Units</div>
-            <div class="text-4xl font-black text-slate-800 tracking-tighter">{{ metrics.total_units }}</div>
-            <div class="mt-6 flex items-center gap-2 text-[9px] font-black text-emerald-600 uppercase">
-                <i data-lucide="trending-up" size="12"></i>
-                +12% vs last shift
+    <!-- Tier 1: Clinical High-Density Metrics -->
+    <div class="stat-grid mb-12">
+        <div class="stat-card border-t-8 border-t-red-800">
+            <div class="stat-label">Total Units (Institution)</div>
+            <div class="stat-value">{{ metrics.total_units }}</div>
+            <div class="flex items-center gap-2 mt-4 text-[9px] font-black text-emerald-600 uppercase">
+                <i data-lucide="activity" size="12"></i> Critical Reserve Active
             </div>
         </div>
-        <div class="v4-card-premium p-10 bg-white border-t-4 border-t-amber-500 shadow-xl">
-            <div class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-4">Pending Requisitions</div>
-            <div class="text-4xl font-black text-slate-800 tracking-tighter">{{ metrics.pending_requests }}</div>
-            <div class="mt-6 flex items-center gap-2 text-[9px] font-black text-amber-600 uppercase">
-                <i data-lucide="alert-circle" size="12"></i>
-                Requires Hub Action
+        
+        <div class="stat-card border-t-8 border-t-amber-500">
+            <div class="stat-label">Pending Requisitions</div>
+            <div class="stat-value">{{ metrics.pending_requests }}</div>
+            <div class="flex items-center gap-2 mt-4 text-[9px] font-black text-amber-600 uppercase">
+                <i data-lucide="alert-circle" size="12"></i> Requires Staff Action
             </div>
         </div>
-        <div class="v4-card-premium p-10 bg-white border-t-4 border-t-red-500 shadow-xl">
-            <div class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-4">Critical Priorities</div>
-            <div class="text-4xl font-black text-slate-800 tracking-tighter">{{ metrics.critical_patients }}</div>
-            <div class="mt-6 flex items-center gap-2 text-[9px] font-black text-red-600 uppercase">
-                <i data-lucide="zap" size="12"></i>
-                Priority Mesh Active
+
+        <div class="stat-card border-t-8 border-t-red-600">
+            <div class="stat-label">Critical High-Risk Priorities</div>
+            <div class="stat-value">{{ metrics.critical_patients }}</div>
+            <div class="flex items-center gap-2 mt-4 text-[9px] font-black text-red-600 uppercase">
+                <i data-lucide="zap" size="12"></i> Priority Protocol Active
             </div>
         </div>
-        <div class="v4-card-premium p-10 bg-white border-t-4 border-t-blue-500 shadow-xl">
-            <div class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-4">Regional Nodes</div>
-            <div class="text-4xl font-black text-slate-800 tracking-tighter">0{{ metrics.region_count }}</div>
-            <div class="mt-6 flex items-center gap-2 text-[9px] font-black text-blue-600 uppercase">
-                <i data-lucide="map-pin" size="12"></i>
-                Synchronized Mesh
+
+        <div class="stat-card border-t-8 border-t-slate-800">
+            <div class="stat-label">Regional Sync Nodes</div>
+            <div class="stat-value">0{{ metrics.region_count }}</div>
+            <div class="flex items-center gap-2 mt-4 text-[9px] font-black text-slate-400 uppercase">
+                <i data-lucide="globe" size="12"></i> Multi-Node Mesh Sync
             </div>
         </div>
     </div>
 
+    <!-- Tier 2: Large-Scale Clinical Visualization -->
     <div class="grid grid-cols-12 gap-8">
         
-        <!-- Left: Phenotype Distribution -->
+        <!-- Left: Stock Ledger (Chart) -->
         <div class="col-span-12 lg:col-span-8">
-            <div class="luxury-card p-10 shadow-2xl h-full">
-                <div class="flex items-center justify-between mb-12 border-b border-slate-50 pb-6">
-                    <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Institutional Stock Distribution</h5>
-                    <div class="v4-pill bg-slate-50 border-none text-[8px] font-black">Mesh Live v4.4</div>
+            <div class="clinical-card h-full">
+                <div class="flex items-center justify-between mb-12">
+                    <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 border-b-2 border-red-500 pb-2">Institutional Stock Analysis</h5>
+                    <div class="hemo-pill pill-blue border border-blue-50">Sync Protocol Active</div>
                 </div>
                 
                 <div class="h-80 relative">
-                    <canvas id="stockDistributionChart"></canvas>
+                    <canvas id="hemoStockChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Right: Recent Requisition Audit -->
+        <!-- Right: Recent Activity Protocol (Ledger) -->
         <div class="col-span-12 lg:col-span-4">
-            <div class="luxury-card p-10 shadow-2xl h-full">
-                <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-10 pb-6 border-b border-slate-50">Recent Requisition Node Logs</h5>
+            <div class="clinical-card h-full">
+                <h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-10 border-b-2 border-red-500 pb-2 w-fit">Recent Requisition Node Logs</h5>
                 
-                <div class="space-y-6">
+                <div class="space-y-4">
                     {% for r in metrics.request_trends %}
-                    <div class="flex items-center gap-6 p-4 bg-slate-50/50 rounded-2xl border border-slate-100 group">
-                        <div class="h-10 w-10 bg-white rounded-xl flex items-center justify-center shrink-0 shadow-sm">
-                            <i data-lucide="file-text" class="text-slate-400" size="16"></i>
+                    <div class="flex items-center gap-6 p-4 bg-slate-50/50 rounded-xl border border-slate-100/50 group">
+                        <div class="h-10 w-10 bg-white rounded-lg flex items-center justify-center shrink-0 shadow-sm border border-slate-50">
+                            <i data-lucide="file-spreadsheet" class="text-slate-400" size="16"></i>
                         </div>
                         <div class="flex-grow">
-                            <div class="text-[8px] font-black text-slate-400 uppercase mb-1">{{ r.city }} Hub</div>
-                            <h6 class="text-[11px] font-black text-slate-800 tracking-tight">{{ r.units_required }} Units ({{ r.blood_group }})</h6>
+                            <div class="text-[8px] font-black text-slate-400 uppercase mb-1">{{ r.city }} HUB</div>
+                            <h6 class="text-[11px] font-black text-slate-800">{{ r.units_required }} Units ({{ r.blood_group }})</h6>
                         </div>
-                        <div class="text-[8px] font-black {{ 'text-amber-500' if r.status == 'pending' else 'text-emerald-500' }} uppercase">
+                        <div class="hemo-pill {{ 'pill-red' if r.status == 'pending' else 'pill-green' }} text-[8px] uppercase font-black">
                             {{ r.status }}
                         </div>
                     </div>
                     {% else %}
-                    <p class="text-center text-xs font-black text-slate-300 uppercase py-10">No Audit Logs In Hub Hub.</p>
+                    <p class="text-center text-[10px] font-black text-slate-400 uppercase py-10 tracking-widest">No Logs Detected In Hub.</p>
                     {% endfor %}
                 </div>
-                
-                <button class="w-full mt-10 py-5 btn-elite bg-slate-900 text-white text-[10px] font-black tracking-widest uppercase">
-                    Load Full Audit Trail Ledger
-                </button>
             </div>
         </div>
-
     </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     lucide.createIcons();
     
-    // Institutional Distribution Visualization
+    // Hemo-Sync Stock Distribution Logic
     fetch('/api/analytics/stock')
         .then(res => res.json())
         .then(payload => {
             const data = payload.data;
-            const ctx = document.getElementById('stockDistributionChart').getContext('2d');
+            const ctx = document.getElementById('hemoStockChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -126,11 +118,11 @@
                     datasets: [{
                         label: 'Phenotype Units',
                         data: Object.values(data),
-                        backgroundColor: 'rgba(16, 185, 129, 0.8)',
-                        borderColor: '#10b981',
-                        borderWidth: 2,
-                        borderRadius: 12,
-                        barThickness: 40
+                        backgroundColor: '#991B1B', // Hemo-Red
+                        borderColor: '#7F1D1D',
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        barThickness: 32
                     }]
                 },
                 options: {
@@ -138,8 +130,15 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { weight: 'bold' } } },
-                        x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } }
+                        y: { 
+                            beginAtZero: true, 
+                            grid: { color: '#F1F5F9', borderDash: [5, 5] }, 
+                            ticks: { font: { weight: 'bold', size: 10 } } 
+                        },
+                        x: { 
+                            grid: { display: false }, 
+                            ticks: { font: { weight: 'bold', size: 10 } } 
+                        }
                     }
                 }
             });

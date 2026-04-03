@@ -11,7 +11,7 @@ class AnalyticsService:
         """Aggregates national clinical metrics for the SaaS Control Center."""
         stock = StockRepository.get_all_stock()
         requests = RequestRepository.get_all_requests()
-        donors = DonorRepository.get_all_donors()
+        donors = DonorRepository.get_all()
         patients = PatientRepo.get_all_patients()
 
         # Calculation Metrics
