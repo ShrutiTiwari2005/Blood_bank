@@ -22,10 +22,10 @@ def create_app():
     # Initialize Extensions
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
-    login_manager.login_message_category = 'info'
+    login_manager.login_message = None # Disable duplicate institutional flash
     csrf.init_app(app)
 
-    # Register Blueprints (v4.4 Surgical Alignment)
+    # Register Blueprints (v5.1 Institutional Alignment)
     from app.routes.main_routes import main_bp
     from app.routes.donor_routes import donor_bp
     from app.routes.stock_routes import stock_bp
