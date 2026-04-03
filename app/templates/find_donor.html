@@ -24,6 +24,7 @@
     <!-- Search Controller (Institutional Interface) -->
     <div class="luxury-card p-12 mb-12 shadow-2xl border-t-8 border-t-emerald-500">
         <form method="POST" class="grid grid-cols-12 gap-10 items-end">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="col-span-1 border-r border-slate-100 py-2 flex flex-col items-center justify-center">
                 <i data-lucide="microscope" class="text-emerald-500 mb-2" size="24"></i>
                 <span class="text-[8px] font-black text-slate-400 tracking-widest uppercase">Scanner</span>

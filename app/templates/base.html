@@ -13,6 +13,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="luxury-experience vibrancy-low bg-slate-50">
+    <!-- SaaS Institutional Overlay Node -->
+    <div class="v4-mobile-overlay" id="v4MobileOverlay"></div>
 
     <!-- Layer 1: Master Navigation Suite (v4.4 Floating Nav) -->
     <nav class="v4-top-nav fixed top-0 inset-x-0 h-20 z-[2000] transition-all duration-500">
@@ -52,7 +54,7 @@
             </div>
 
             <!-- Mobile Hub Trigger -->
-            <button class="md:hidden p-3 bg-white rounded-xl shadow-sm border border-slate-100">
+            <button class="md:hidden p-3 bg-white rounded-xl shadow-sm border border-slate-100" onclick="toggleV4Mobile()">
                 <i data-lucide="menu" size="20"></i>
             </button>
         </div>
@@ -132,6 +134,14 @@
     <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
     <script>
         lucide.createIcons();
+
+        function toggleV4Mobile() {
+            document.body.classList.toggle('v4-mobile-active');
+        }
+
+        document.getElementById('v4MobileOverlay')?.addEventListener('click', () => {
+            document.body.classList.remove('v4-mobile-active');
+        });
         
         // Navigation Scroll Effect
         window.addEventListener('scroll', () => {

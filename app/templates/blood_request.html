@@ -52,6 +52,7 @@
     <div class="luxury-card p-12 mb-12 shadow-2xl border-t-8 border-t-red-500 stagger-item">
         
         <form method="POST" class="grid grid-cols-12 gap-10 items-end">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="col-span-4">
                 <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Target Regional Hub</label>
                 <select class="input-elite h-14 font-bold text-sm" name="city">

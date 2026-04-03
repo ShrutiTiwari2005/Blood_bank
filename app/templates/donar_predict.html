@@ -1,53 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Donor Prediction</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #f2f2f2;
-            text-align: center;
-        }
-        .box {
-            margin: 100px auto;
-            padding: 30px;
-            width: 350px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-        }
-        input {
-            margin: 10px;
-            padding: 10px;
-            width: 90%;
-        }
-        button {
-            padding: 10px 20px;
-            background: red;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
 
-<div class="box">
-    <h2>Donor Prediction</h2>
+{% block content %}
 
-    <form method="POST">
-        <input type="number" name="recency" placeholder="Recency (months)" required><br>
-        <input type="number" name="frequency" placeholder="Frequency (times)" required><br>
-        <input type="number" name="monetary" placeholder="Blood Donated (c.c.)" required><br>
-        <input type="number" name="time" placeholder="Time since first donation" required><br>
+<div class="max-w-4xl mx-auto vibrancy-low p-8 py-20 reveal active">
+    
+    <div class="text-center mb-16">
+        <div class="h-20 w-20 bg-red-500 rounded-[2.5rem] flex items-center justify-center shadow-2xl shadow-red-500/20 mx-auto mb-10">
+            <i data-lucide="brain-circuit" class="text-white" size="40"></i>
+        </div>
+        <h1 class="text-5xl font-black text-slate-800 tracking-tighter">Donor Reliability Predictor</h1>
+        <p class="text-slate-500 mt-4 text-xl font-medium opacity-80">AI-driven reliability forecasting for regional donor nodes.</p>
+    </div>
 
-        <button type="submit">Predict</button>
-    </form>
+    <div class="luxury-card p-12 shadow-2xl border-t-8 border-t-red-500">
+        
+        <form method="POST" class="space-y-12">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-    {% if prediction %}
-        <h3>{{ prediction }}</h3>
-    {% endif %}
+            <div class="grid grid-cols-2 gap-10">
+                <div class="form-group">
+                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Recency (Months)</label>
+                    <input type="number" name="recency" class="input-elite h-14 font-black" placeholder="Months since last donation" required>
+                </div>
+                <div class="form-group">
+                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Frequency (Total Times)</label>
+                    <input type="number" name="frequency" class="input-elite h-14 font-black" placeholder="Total donation count" required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-10">
+                <div class="form-group">
+                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Monetary (Total c.c.)</label>
+                    <input type="number" name="monetary" class="input-elite h-14 font-black" placeholder="Total blood volume (c.c.)" required>
+                </div>
+                <div class="form-group">
+                    <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Time Since First (Months)</label>
+                    <input type="number" name="time" class="input-elite h-14 font-black" placeholder="Months since first donation" required>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full btn-elite btn-primary py-5 text-sm shadow-xl shadow-red-500/10 tracking-widest bg-red-600 hover:bg-red-700">
+                <i data-lucide="zap" class="mr-3" size="18"></i>
+                EXECUTE AI PREDICTION HUB
+            </button>
+        </form>
+
+        {% if prediction %}
+        <div class="mt-16 pt-12 border-t border-slate-100 animate-in slide-in-from-bottom duration-500">
+            <div class="p-8 bg-slate-900 rounded-[3rem] text-white flex items-center justify-between">
+                <div class="flex items-center gap-8">
+                    <div class="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
+                        <i data-lucide="activity" class="text-emerald-500" size="32"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">AI Diagnostic Output</div>
+                        <h3 class="text-3xl font-black tracking-tighter">{{ prediction }}</h3>
+                    </div>
+                </div>
+                <div class="v4-pill bg-white/5 border-white/10 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                    RF-Model Sync Verified
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <p class="text-center text-[10px] font-black text-slate-300 uppercase mt-12 tracking-[0.2em] opacity-60">
+        Institutional Prediction Mesh • v4.4 Adaptive Node
+    </p>
+
 </div>
 
-</body>
-</html>
+<script>
+    lucide.createIcons();
+</script>
+
+{% endblock %}

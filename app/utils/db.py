@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import pooling
-from config import Config
+from app.config import Config
 
 class DatabaseManager:
     _pool = None

@@ -1,5 +1,5 @@
 from app import create_app
-from config import Config
+from app.config import Config
 
 # Create the application instance
 application = create_app()

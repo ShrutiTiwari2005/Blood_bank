@@ -83,6 +83,7 @@ def create_app():
     @app.errorhandler(mysql.connector.DatabaseError)
     def handle_db_error(e):
         from flask import render_template
-        return render_template("errors/db_error.html", error=str(e)), 500
+        # SaaS Standard: Mask raw errors to prevent schema leakage
+        return render_template("errors/db_error.html", error="Clinical Synchronization Node Offline. Check network connectivity."), 500
 
     return app

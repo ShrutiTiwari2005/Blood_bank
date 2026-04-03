@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.services.stock_service import StockService
 from app.services.prediction_service import PredictionService
 from app.services.donor_service import DonorService
-from app.utils.api_response import ApiResponse
+from app.utils.response import ApiResponse
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
