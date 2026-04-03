@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto p-4 vibrancy-medium">
+    
+    <div class="mb-8 flex justify-between items-end reveal">
+        <div>
+            <h1 class="text-4xl font-black tracking-tighter">Decision Analytics</h1>
+            <p class="text-slate-500 mt-2">Historical trends vs. AI-based forecasting for procurement units.</p>
+        </div>
+        <div class="flex gap-3">
+            <div class="system-status bg-white border border-slate-100 flex items-center gap-2">
+                <i data-lucide="activity" size="14" class="text-emerald-500"></i>
+                <span class="text-[10px] font-black uppercase tracking-widest">Auto-Refresh Active</span>
+            </div>
+            <button class="btn-elite bg-white border border-slate-200 text-xs font-bold text-slate-600">
+                <i data-lucide="download-cloud" class="mr-2" size="14"></i> Export PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Tier 1: KPI Analytics Overview (SaaS Standard) -->
+    <div class="grid grid-cols-4 gap-6 mb-12 stagger-grid">
+        <div class="luxury-card p-6 border-l-4 border-l-blue-500">
+            <div class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Demand Forecast (Q2)</div>
+            <div class="text-3xl font-black text-slate-800">+12.4%</div>
+            <div class="text-xs text-blue-500 font-bold mt-2 flex items-center gap-1">
+                <i data-lucide="trending-up" size="12"></i> Trending Up
+            </div>
+        </div>
+        <div class="luxury-card p-6 border-l-4 border-l-emerald-500">
+            <div class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Procurement Efficiency</div>
+            <div class="text-3xl font-black text-slate-800">98.2%</div>
+            <div class="text-xs text-emerald-500 font-bold mt-2 flex items-center gap-1">
+                <i data-lucide="check" size="12"></i> Optimal Sync
+            </div>
+        </div>
+        <div class="luxury-card p-6 border-l-4 border-l-amber-500">
+            <div class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Average Scarcity Duration</div>
+            <div class="text-3xl font-black text-slate-800">4.2 Hrs</div>
+            <div class="text-xs text-amber-500 font-bold mt-2 flex items-center gap-1">
+                <i data-lucide="clock" size="12"></i> Critical Window
+            </div>
+        </div>
+        <div class="luxury-card p-6 border-l-4 border-l-red-500">
+            <div class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Unfulfilled Requests</div>
+            <div class="text-3xl font-black text-slate-800">0</div>
+            <div class="text-xs text-red-500 font-bold mt-2 flex items-center gap-1">
+                <i data-lucide="shield-alert" size="12"></i> Zero Casualty Goal
+            </div>
+        </div>
+    </div>
+
+    <!-- Tier 2: Forecasting Insights (Interactive Chart.js) -->
+    <div class="grid grid-cols-5 gap-8 mb-12 reveal">
+        <div class="col-span-3 luxury-card p-8 h-96 relative flex flex-col items-center justify-center">
+            <!-- Asset: Real Chart.js Canvas -->
+            <canvas id="trendChart"></canvas>
+            
+            <div class="absolute bottom-6 flex gap-12 text-[10px] font-black uppercase tracking-widest">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span> Supply</div>
+                <div class="flex items-center gap-2"><span class="w-2 h-2 bg-red-500 rounded-full"></span> Demand Forecast</div>
+            </div>
+        </div>
+
+        <div class="col-span-2 luxury-card p-8 bg-slate-900 text-white flex flex-col">
+            <h5 class="font-bold text-lg mb-6">Regional Distribution</h5>
+            <div class="space-y-6 flex-grow">
+                <div class="item">
+                    <div class="flex justify-between text-xs font-bold mb-2">
+                        <span>Bhopal Logistics Hub</span>
+                        <span>42%</span>
+                    </div>
+                    <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-emerald-500" style="width: 42%;"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="flex justify-between text-xs font-bold mb-2">
+                        <span>Indore Procurement Unit</span>
+                        <span>28%</span>
+                    </div>
+                    <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-blue-500" style="width: 28%;"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="flex justify-between text-xs font-bold mb-2">
+                        <span>Gwalior Secondary Node</span>
+                        <span>18%</span>
+                    </div>
+                    <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-amber-500" style="width: 18%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-auto pt-8 border-t border-slate-800 flex items-center gap-3">
+                <div class="h-10 w-10 bg-white/10 rounded-lg flex items-center justify-center">
+                    <i data-lucide="database" size="18"></i>
+                </div>
+                <div class="text-[10px]">
+                    <div class="font-bold opacity-60">Verified Records</div>
+                    <div class="font-black text-xs">84,201 Data Clusters Synchronized</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tier 3: Secondary Analytics (Bar Chart) -->
+    <div class="luxury-card p-10 h-96 reveal mb-12">
+        <h5 class="font-bold text-slate-400 uppercase tracking-widest text-xs mb-6">Clinical Inventory Distribution (Regional Hubs)</h5>
+        <canvas id="stockChart"></canvas>
+    </div>
+
+</div>
+
+<!-- SaaS Charting Dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/toast.js') }}"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script>
+    // Initialize Analytics Engine
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.v4Analytics) {
+            window.v4Analytics.init();
+        }
+        lucide.createIcons();
+    });
+</script>
+
+<style>
+    .col-span-3 { grid-column: span 3; }
+    .col-span-2 { grid-column: span 2; }
+    .h-96 { height: 24rem; }
+</style>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+flask
+mysql-connector-python
+pandas
+scikit-learn
+joblib
+python-dotenv
+flask-login
+flask-bcrypt
+flask-wtf
+email-validator
+gunicorn
+pyjwt

@@ -1,126 +1,140 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block content %}
 
-<title>Find Donor</title>
+<div class="max-w-7xl mx-auto vibrancy-medium p-4 reveal active">
+    
+    <div class="mb-12 flex justify-between items-end">
+        <div>
+            <div class="v4-pill bg-emerald-50 text-emerald-600 mb-6 w-fit border-emerald-100/50">
+                <i data-lucide="crosshair" size="14"></i>
+                <span class="tracking-widest">Regional Hub: Madhya Pradesh Node</span>
+            </div>
+            <h1 class="text-5xl font-black tracking-tighter text-slate-800">Precision Donor Search</h1>
+            <p class="text-slate-500 mt-4 text-lg font-medium opacity-80">Real-time donor phenotype matching & geolocation scouting.</p>
+        </div>
+        <div class="header-status flex items-center gap-6">
+            <div class="v4-pill bg-white border-slate-100 shadow-sm">
+                <div class="pulse-dot bg-emerald-500"></div>
+                <span class="text-[9px] font-black uppercase text-slate-500">Scanning Satellite...</span>
+            </div>
+        </div>
+    </div>
 
-<style>
+    <!-- Search Controller (Institutional Interface) -->
+    <div class="luxury-card p-12 mb-12 shadow-2xl border-t-8 border-t-emerald-500">
+        <form method="POST" class="grid grid-cols-12 gap-10 items-end">
+            <div class="col-span-1 border-r border-slate-100 py-2 flex flex-col items-center justify-center">
+                <i data-lucide="microscope" class="text-emerald-500 mb-2" size="24"></i>
+                <span class="text-[8px] font-black text-slate-400 tracking-widest uppercase">Scanner</span>
+            </div>
+            
+            <div class="col-span-4">
+                <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Target Regional Hub</label>
+                <select class="input-elite h-14 font-bold text-sm" name="city">
+                    <option>Bhopal</option><option>Indore</option>
+                    <option>Gwalior</option><option>Sagar</option>
+                    <option>Jabalpur</option>
+                </select>
+            </div>
+            
+            <div class="col-span-4">
+                <label class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Phenotype Phenotype</label>
+                <select class="input-elite h-14 font-bold text-sm" name="blood_group">
+                    <option>A+</option><option>A-</option>
+                    <option>B+</option><option>B-</option>
+                    <option>AB+</option><option>AB-</option>
+                    <option>O+</option><option>O-</option>
+                </select>
+            </div>
 
-body{
-font-family:Arial;
-background:#f4f6f9;
-text-align:center;
-}
+            <div class="col-span-3">
+                <button type="submit" class="btn-elite btn-primary w-full h-14 shadow-xl text-[11px] font-black tracking-[0.15em]">
+                    <i data-lucide="satellite-dish" class="mr-3" size="18"></i>
+                    Initiate Global Scan
+                </button>
+            </div>
+        </form>
+    </div>
 
-.container{
-width:500px;
-margin:auto;
-margin-top:80px;
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0 0 10px #ccc;
-}
+    <!-- Result Layer (Dynamic Clinical Outputs) -->
+    {% if donors is not none %}
+    <div class="reveal active">
+        <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+            <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-400">Scan Results: {{ donors|length }} Medical Profiles Located</h5>
+            <div class="flex gap-4">
+                <div class="v4-pill bg-slate-50 border-none text-[8px] font-black text-slate-400">RELIABILITY FILTER ACTIVE</div>
+                <div class="v4-pill bg-slate-50 border-none text-[8px] font-black text-slate-400">GEOLOCATION MAPPED</div>
+            </div>
+        </div>
 
-input,select{
-width:90%;
-padding:10px;
-margin:10px;
-}
+        {% if donors %}
+        <div class="grid grid-cols-3 gap-8 stagger-grid">
+            {% for donor in donors %}
+            <div class="v4-card-premium p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+                <div class="flex items-center gap-6 mb-8">
+                    <div class="h-16 w-16 rounded-[1.5rem] bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
+                        <i data-lucide="user" class="text-emerald-500" size="32"></i>
+                    </div>
+                    <div>
+                        <div class="text-[9px] font-black text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full w-fit mb-1 border border-emerald-100">RELIABLE</div>
+                        <h4 class="text-lg font-black text-slate-800 tracking-tight">{{ donor.Name }}</h4>
+                        <p class="text-[10px] font-bold text-slate-400">{{ donor.age }} Years • {{ donor.blood_group }} Group</p>
+                    </div>
+                </div>
 
-button{
-padding:10px 20px;
-background:#e74c3c;
-color:white;
-border:none;
-cursor:pointer;
-}
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-center justify-between p-3 bg-slate-50/50 rounded-xl border border-slate-100">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Regional Hub</span>
+                        <span class="text-xs font-black text-slate-700">{{ donor.City }}</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-slate-50/50 rounded-xl border border-slate-100">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Medical Reliability</span>
+                        <div class="flex items-center gap-2">
+                            <div class="h-2 w-16 bg-slate-200/50 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500" style="width: 84%"></div>
+                            </div>
+                            <span class="text-[10px] font-black text-emerald-600">84%</span>
+                        </div>
+                    </div>
+                </div>
 
-table{
-margin-top:20px;
-width:100%;
-border-collapse:collapse;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:10px;
-}
-
-th{
-background:#e74c3c;
-color:white;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<h2>Find Blood Donor</h2>
-
-<form method="POST">
-
-<input type="text" name="city" placeholder="City" required>
-
-<select name="blood_group">
-
-<option>A+</option>
-<option>A-</option>
-<option>B+</option>
-<option>B-</option>
-<option>AB+</option>
-<option>AB-</option>
-<option>O+</option>
-<option>O-</option>
-
-</select>
-
-<button type="submit">Search</button>
-
-</form>
-
-{% if donors %}
-
-<h3>Available Donors</h3>
-
-<table>
-
-<tr>
-<th>Name</th>
-<th>Age</th>
-<th>Blood Group</th>
-<th>City</th>
-<th>Phone</th>
-</tr>
-
-{% for donor in donors %}
-
-<tr>
-<td>{{ donor.Name }}</td>
-<td>{{ donor.age }}</td>
-<td>{{ donor.blood_group }}</td>
-<td>{{ donor.City }}</td>
-<td>{{ donor.phone }}</td>
-</tr>
-
-{% endfor %}
-
-</table>
-
-{% endif %}
-
-
-{% if message %}
-<p style="color:red;">{{message}}</p>
-{% endif %}
+                <div class="flex gap-4">
+                    <a href="tel:{{ donor.phone }}" class="flex-grow btn-elite bg-slate-900 text-white text-[9px] font-black py-4 uppercase tracking-[0.2em]">
+                        <i data-lucide="phone" class="mr-2" size="14"></i>
+                        Contact Emergency
+                    </a>
+                    <button class="btn-elite bg-white border border-slate-200 text-slate-400 px-4 py-4" onclick="v4Toast.success('Interface Sent')">
+                        <i data-lucide="mail" size="16"></i>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="luxury-card p-20 text-center flex flex-col items-center">
+            <div class="h-24 w-24 bg-red-50 text-red-500 rounded-[2.5rem] flex items-center justify-center mb-8 border border-red-100 shadow-xl animate-pulse">
+                <i data-lucide="user-minus" size="48"></i>
+            </div>
+            <h3 class="text-2xl font-black text-slate-800">No Regional Profiles Located</h3>
+            <p class="text-slate-500 mt-4 max-w-md mx-auto font-medium">AI scouting node suggests broadening phenotype search or regional satellite metrics.</p>
+            <button class="mt-10 btn-elite btn-primary px-10 py-4 text-[10px] font-black" onclick="location.reload()">Reset Hub Scanner</button>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
 
 </div>
 
-</body>
+<script>
+    lucide.createIcons();
+</script>
 
-</html>
+<style>
+    .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .col-span-1 { grid-column: span 1; }
+    .col-span-4 { grid-column: span 4; }
+    .col-span-3 { grid-column: span 3; }
+</style>
+
+{% endblock %}

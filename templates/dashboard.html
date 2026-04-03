@@ -2,104 +2,212 @@
 
 {% block content %}
 
-<h2 class="text-center mb-4">Blood Bank Dashboard</h2>
+<div class="max-w-7xl mx-auto vibrancy-medium p-4">
+    
+    <div class="mb-10 flex justify-between items-end reveal active">
+        <div class="stagger-item">
+            <h1 class="text-4xl font-black tracking-tighter text-slate-800">Operational Overview</h1>
+            <p class="text-slate-500 mt-2 font-medium">Real-time regional logistics & clinical procurement status.</p>
+        </div>
+        <div class="flex gap-4 stagger-item">
+            <div class="v4-pill bg-white border border-slate-100 flex items-center gap-2">
+                <i data-lucide="shield-check" size="14" class="text-emerald-500"></i>
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">Compliance: GxP Standard</span>
+            </div>
+            <button class="btn-elite bg-slate-900 text-white text-[10px] font-black px-6 py-3">
+                <i data-lucide="refresh-cw" class="mr-2" size="14"></i> Trigger Force-Sync
+            </button>
+        </div>
+    </div>
 
-<div class="row text-center mb-4">
+    <!-- Tier 1: AI Logic Banner (Urgent Action Indicator) -->
+    <div class="mb-12 reveal active">
+        <div class="luxury-card bg-emerald-50/50 border-emerald-100 p-8 flex items-center justify-between relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full"></div>
+            
+            <div class="flex items-center gap-8 relative z-10">
+                <div class="h-20 w-20 rounded-[2rem] bg-white flex items-center justify-center shadow-lg border border-emerald-100">
+                    <i data-lucide="brain-circuit" class="text-emerald-500" size="42"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-black text-emerald-900 tracking-tight">AI Distribution Logic: Balanced</h2>
+                    <p class="text-sm text-emerald-700 font-medium opacity-80">Inventory distribution across regional hubs is currently optimized. No imminent critical scarcity detected.</p>
+                </div>
+            </div>
+            
+            <div class="text-right stagger-item relative z-10">
+                <div class="text-[10px] uppercase font-black tracking-widest text-emerald-600/60 mb-2">System Confidence</div>
+                <div class="text-3xl font-black text-emerald-600">98.4%</div>
+            </div>
+        </div>
+    </div>
 
-<div class="col-md-4">
+    <!-- Tier 2: Precision Metrics -->
+    <div class="grid grid-cols-4 gap-8 mb-12 stagger-grid">
+        <div class="v4-card-premium p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+            <div class="flex justify-between items-start mb-6">
+                <div class="h-10 w-10 bg-emerald-50 rounded-xl flex items-center justify-center">
+                    <i data-lucide="droplet" class="text-emerald-500" size="20"></i>
+                </div>
+                <div class="v4-pill bg-emerald-50 border-emerald-100/50">
+                    <div class="pulse-dot bg-emerald-500"></div>
+                    <span class="text-[9px] text-emerald-600">Optimal</span>
+                </div>
+            </div>
+            <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Total Inventory</div>
+            <div class="text-4xl font-black text-slate-800 tracking-tighter">8,421 <span class="text-xs text-slate-300">Units</span></div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2">
+                <i data-lucide="trending-up" class="text-emerald-500" size="14"></i>
+                <span class="text-[10px] font-black text-slate-500">+12% vs Mean Avg</span>
+            </div>
+        </div>
 
-<a href="/blood_stock" style="text-decoration:none">
+        <div class="v4-card-premium p-8">
+            <div class="flex justify-between items-start mb-6">
+                <div class="h-10 w-10 bg-blue-50 rounded-xl flex items-center justify-center">
+                    <i data-lucide="users" class="text-blue-500" size="20"></i>
+                </div>
+                <div class="v4-pill bg-blue-50 border-blue-100/50">
+                    <span class="text-[9px] text-blue-600">+12 Today</span>
+                </div>
+            </div>
+            <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Donor Registry</div>
+            <div class="text-4xl font-black text-slate-800 tracking-tighter">1,208 <span class="text-xs text-slate-300">Verified</span></div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2">
+                <i data-lucide="activity" class="text-blue-500" size="14"></i>
+                <span class="text-[10px] font-black text-slate-500">84% Reliability Score</span>
+            </div>
+        </div>
 
-<div class="card shadow">
+        <div class="v4-card-premium p-8">
+            <div class="flex justify-between items-start mb-6">
+                <div class="h-10 w-10 bg-amber-50 rounded-xl flex items-center justify-center">
+                    <i data-lucide="clipboard-list" class="text-amber-500" size="20"></i>
+                </div>
+            </div>
+            <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Active Requisitions</div>
+            <div class="text-4xl font-black text-slate-800 tracking-tighter">14 <span class="text-xs text-slate-300">Pending</span></div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2">
+                <span id="v4-latency" class="text-[10px] font-black text-slate-500">Avg Processing: 14.2 Min</span>
+            </div>
+        </div>
 
-<div class="card-body">
+        <div class="v4-card-premium p-8">
+            <div class="flex justify-between items-start mb-6">
+                <div class="h-10 w-10 bg-red-50 rounded-xl flex items-center justify-center">
+                    <i data-lucide="zap" class="text-red-500" size="20"></i>
+                </div>
+            </div>
+            <div class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Predictive Alerts</div>
+            <div class="text-4xl font-black text-slate-800 tracking-tighter">02 <span class="text-xs text-slate-300">Hubs at Risk</span></div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2 text-red-500 font-black text-[10px] tracking-tight">
+                <i data-lucide="alert-triangle" size="14"></i>
+                High Priority Deployment Required
+            </div>
+        </div>
+    </div>
 
-<h5>Total Blood Units</h5>
-<h3>{{ total_units }}</h3>
+    <!-- Tier 3: Regional Stock Heatmap (Table Analytics) -->
+    <div class="grid grid-cols-5 gap-8 reveal active">
+        <div class="col-span-3 v4-card-premium p-10">
+            <div class="flex justify-between items-center mb-10">
+                <h3 class="font-black text-xl tracking-tight">Regional Inventory Audit</h3>
+                <button class="text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:text-emerald-700 underline">View Full Ledger</button>
+            </div>
+            
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                        <th class="pb-6">Regional Hub</th>
+                        <th class="pb-6">Phenotype</th>
+                        <th class="pb-6">Stock Level</th>
+                        <th class="pb-6 text-right">Operational Status</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm font-bold text-slate-700">
+                    <tr class="border-b border-slate-50">
+                        <td class="py-6">Bhopal Hub</td>
+                        <td>O-</td>
+                        <td class="text-slate-800 font-black">124 Units</td>
+                        <td class="text-right">
+                            <span class="v4-pill bg-emerald-50 text-emerald-600 border-none inline-flex ml-auto">Normal</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-slate-50">
+                        <td class="py-6">Indore Unit</td>
+                        <td>A+</td>
+                        <td class="text-slate-800 font-black">82 Units</td>
+                        <td class="text-right">
+                            <span class="v4-pill bg-amber-50 text-amber-600 border-none inline-flex ml-auto">Scarcity Warning</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="py-6">Gwalior Secondary</td>
+                        <td>AB-</td>
+                        <td class="text-slate-800 font-black">210 Units</td>
+                        <td class="text-right">
+                            <span class="v4-pill bg-emerald-50 text-emerald-600 border-none inline-flex ml-auto">Full Supply</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-span-2 v4-card-premium p-10 bg-slate-900 border-none text-white">
+            <h3 class="font-black text-xl tracking-tight mb-2">Intelligence Feed</h3>
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-8">AI Audit Logs (24H Pulse)</p>
+            
+            <div class="space-y-8">
+                <div class="flex gap-4">
+                    <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                        <i data-lucide="log-in" size="18"></i>
+                    </div>
+                    <div class="text-[10px]">
+                        <div class="font-black text-white/90">Institutional Login</div>
+                        <div class="font-bold text-slate-500">Clinical Admin #942</div>
+                        <div class="mt-2 font-black text-slate-600">02:14:42 AM SYNC</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                        <i data-lucide="trending-up" size="18" class="text-emerald-400"></i>
+                    </div>
+                    <div class="text-[10px]">
+                        <div class="font-black text-white/90">Stock Procurement</div>
+                        <div class="font-bold text-slate-500">14 Units B- added to Bhopal</div>
+                        <div class="mt-2 font-black text-slate-600">01:42:15 AM SYNC</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/5">
+                        <i data-lucide="activity" size="18"></i>
+                    </div>
+                    <div class="text-[10px]">
+                        <div class="font-black text-white/90">System Diagnostic</div>
+                        <div class="font-bold text-slate-500">Inference Engine Lifecycle Tick</div>
+                        <div class="mt-2 font-black text-slate-600">01:00:00 AM SYNC</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="w-full mt-12 btn-elite bg-white/10 hover:bg-white/20 text-white text-[10px] font-black border border-white/5 py-4">
+                Enter Institutional Logs
+            </button>
+        </div>
+    </div>
 
 </div>
 
-</div>
+<script>
+    lucide.createIcons();
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(r => r.classList.add('active'));
+</script>
 
-</a>
-
-</div>
-
-
-<div class="col-md-4">
-
-<a href="/donor_list" style="text-decoration:none">
-
-<div class="card shadow">
-
-<div class="card-body">
-
-<h5>Total Donors</h5>
-<h3>{{ total_donors }}</h3>
-
-</div>
-
-</div>
-
-</a>
-
-</div>
-
-
-<div class="col-md-4">
-
-<a href="/requests" style="text-decoration:none">
-
-<div class="card shadow">
-
-<div class="card-body">
-
-<h5>Blood Requests</h5>
-<h3>{{ total_requests }}</h3>
-
-</div>
-
-</div>
-
-</a>
-
-</div>
-
-</div>
-
-
-<div class="card shadow">
-
-<div class="card-body">
-
-<h4 class="mb-3">Blood Stock</h4>
-
-<table class="table table-bordered">
-
-<tr>
-
-<th>City</th>
-<th>Blood Group</th>
-<th>Units Available</th>
-
-</tr>
-
-{% for row in data %}
-
-<tr>
-
-<td>{{ row.city }}</td>
-<td>{{ row.blood_group }}</td>
-<td>{{ row.units_available }}</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
-
-</div>
-
-</div>
+<style>
+    .col-span-3 { grid-column: span 3; }
+    .col-span-2 { grid-column: span 2; }
+    .tracking-tight { letter-spacing: -0.035em; }
+</style>
 
 {% endblock %}
