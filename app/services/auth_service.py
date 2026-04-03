@@ -1,7 +1,7 @@
 from flask_bcrypt import Bcrypt
 from flask_login import UserMixin
 from app import login_manager
-from app.repositories.user_repository import UserRepository
+from app.repositories.user_repo import UserRepository
 
 bcrypt = Bcrypt()
 

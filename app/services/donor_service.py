@@ -1,4 +1,4 @@
-from app.repositories.donor_repository import DonorRepository
+from app.repositories.donor_repo import DonorRepository
 from app.services.activity_service import ActivityService
 from flask_login import current_user
 

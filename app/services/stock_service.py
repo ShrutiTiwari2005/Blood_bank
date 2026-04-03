@@ -1,6 +1,6 @@
-from app.repositories.stock_repository import StockRepository
-from app.repositories.request_repository import RequestRepository
-from app.repositories.donor_repository import DonorRepository
+from app.repositories.stock_repo import StockRepository
+from app.repositories.request_repo import RequestRepository
+from app.repositories.donor_repo import DonorRepository
 from app.services.activity_service import ActivityService
 from flask_login import current_user
 

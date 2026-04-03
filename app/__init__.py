@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
-from config import Config
+from .config import Config
 import mysql.connector
 
 # Initialize Elite Extensions
@@ -9,10 +9,8 @@ login_manager = LoginManager()
 csrf = CSRFProtect()
 
 def create_app():
-    """Application Factory Pattern - SaaS Production Architecture v4.3"""
-    app = Flask(__name__, 
-                template_folder='../templates', 
-                static_folder='../static')
+    """Application Factory Pattern - SaaS Production Architecture v4.4"""
+    app = Flask(__name__)
     
     app.config.from_object(Config)
 
@@ -27,18 +25,22 @@ def create_app():
     login_manager.login_message_category = 'info'
     csrf.init_app(app)
 
-    # Register Blueprints (Surgical Consolidation)
+    # Register Blueprints (v4.4 Surgical Alignment)
     from app.routes.main_routes import main_bp
     from app.routes.donor_routes import donor_bp
     from app.routes.stock_routes import stock_bp
     from app.routes.auth_routes import auth_bp
     from app.routes.api_routes import api_bp
+    from app.routes.patient_routes import patient_bp
+    from app.routes.analytics_routes import analytics_bp
     
     app.register_blueprint(main_bp)
     app.register_blueprint(donor_bp)
     app.register_blueprint(stock_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(api_bp)
+    app.register_blueprint(patient_bp)
+    app.register_blueprint(analytics_bp)
 
     # Import User Loader from Service Logic
     from app.services.auth_service import load_user
@@ -52,7 +54,7 @@ def create_app():
         from flask_login import current_user
         return dict(
             db_status=DatabaseManager.is_connected(),
-            app_version="v4.3.0-ELITE",
+            app_version="v4.4.0-ARCHITECT",
             current_user=current_user
         )
 
